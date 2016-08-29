@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="jquery.datetimepicker.css"/ >
+<script src="jquery.js"></script>
+<script src="jquery.datetimepicker.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="./jquery.datetimepicker.css"/>-->
+<style type="text/css">
+
+
+
+</style>
+</head>
+<body style="background-color:#F5A9A9">
+<script>
+   $('#datetimepicker').datetimepicker({lang:'ch'});
+</script>
+<h1 class="page-title" style="text-align:700;margin:0;color:#F3F781">记录你特别的日子。。。</h1>
+ <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_rnFpr4-giZoN0gx1j1gE5oIHAfSJR8mo5u8LXU8Lb6ywhaXP" style="border-radius:50%" >
+ <select id="select" style="text-align:center">
+  	<option value="a1">是</option> <p id="text3" style="text-align:center"> 大姨妈来了？</p> 
+    <option value="a2">否</option>
+	<div id="lastDiv">
+		<h3>上次时间：</h3>
+		<input type="text" id="datetimepicker2"/>到<input type="text" id="datetimepicker3" readOnly="readOnly"/><br><br>
+	</div>
+	<div id="nowDiv">
+		<h3>预测</h3><label id="left"></label>
+		
+	</div>
+</body>
+<script src="./jquery.js"></script>
+<script src="build/jquery.datetimepicker.full.js"></script>
+<script>
+
+//时间控件设置datetimepicker2样式
+$('#datetimepicker2').datetimepicker({
+	lang:'zh-CN',
+	timepicker:false,
+	format:'Y-m-d'	,
+ 
+});
+//时间控件设置datetimepicker3样式
+$('#datetimepicker3').datetimepicker({
+	lang:'zh-CN',
+	timepicker:false,
+	format:'Y-m-d'	,
+ 
+});
+
+$(function(){
+	//获取上次的开始时间
+	var lastTime=$('#datetimepicker2').val();
+	//如果上次的时间为空 
+	if(lastTime==''){
+		//隐藏nowDiv
+		$('#nowDiv').hide();
+		alert("请先设置上次时间");		
+	}
+})
+//上次的开始时间改变事件（改变上次时间时候触发）
+$('#datetimepicker2').change(function(){
+//获取上次的开始时间
+var lastTime=$('#datetimepicker2').val();
+	//如果上次的时间不为空 
+	if(lastTime!=''){
+		//显示nowDiv
+		$('#nowDiv').show();
+		//获取上次时间的毫秒数
+		var oldTime = new Date(lastTime).getTime();
+		//获取当前时间的毫秒数
+		var nowTime=new Date().getTime();
+		//如果上次的时间的毫秒数大于当前时间的毫秒
+		if(nowTime-oldTime<0){
+			//隐藏nowDiv
+			$('#nowDiv').hide();
+			//设置datetimepicker2的值为“”
+			$('#datetimepicker2').val("");
+			//设置datetimepicker3的值为“”
+			$('#datetimepicker3').val("");
+			alert("设置的时间大于当前时间，请重新设置");
+		}else{
+			//上次的时间的毫秒数小于当前时间的毫秒
+			//上次的时间的毫秒数+6天的毫秒数 即为datetimepicker3的毫秒数
+			var toOldTime=oldTime+(6*24*60*60*1000);
+			//获取将toOldTime毫秒数转换成日期格式获取为的月数
+			var month=new Date(toOldTime).getMonth()+1;
+			//获取将toOldTime毫秒数转换成日期格式获取为的天数
+			var day=new Date(toOldTime).getDate();
+			//获取将toOldTime毫秒数转换成日期格式获取为的年数			
+			var year=new Date(toOldTime).getFullYear();
+			//设置datetimepicker3的时间
+			$('#datetimepicker3').val(year+"-"+month+"-"+day);
+			//如果datetimepicker3的毫秒数（toOldTime）大于当前时间的毫秒 则还在那两天
+			if(toOldTime>nowTime){
+				$('#left').html("<span style='color:red;font-size:30px'>预测大姨妈来了</span>");
+			}else{
+				//反之则可能不在那两天
+				//（当前时间-上次时间）/一天的毫秒数%28         （当前时间-上次时间）/一天的毫秒数=当天距离上次的时间天数
+				var a=parseInt((nowTime-oldTime)/(24*60*60*1000)%28);
+				if(a==-1){
+					$('#left').html("<span style='color:red;font-size:30px'>预测大姨妈来了第一天</span>");
+				}else if (a==0) {
+					$('#left').html("<span style='color:red;font-size:30px'>预测大姨妈来了第二天</span>");
+				}
+				else if (a==1) {
+					$('#left').html("<span style='color:red;font-size:30px'>预测大姨妈来了第三天</span>");
+				}
+				else if (a==2) {
+					$('#left').html("<span style='color:red;font-size:30px'>预测大姨妈来了第四天</span>");
+				}
+				else if (a==3) {
+					$('#left').html("<span style='color:red;font-size:30px'>预测大姨妈来了第五天</span>");
+				}
+				else if (a==4) {
+					$('#left').html("<span style='color:red;font-size:30px'>预测大姨妈来了第六天</span>");
+				}
+				else{
+					$('#left').html("预测距离下次时间还有<span style='color:red;font-size:30px'>"+(28-a)+"</span>天");
+				}
+				
+			}
+			
+		}
+		
+	}else{
+		$('#nowDiv').hide();		
+		alert("请先设置上次时间");
+	}
+})
+if (value) {}
+
+
+</script>
+</html>
