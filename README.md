@@ -42,3 +42,5 @@
 })
 
 ```
+
+*  ionic platform add ios/android   //生成的app可直接下载
