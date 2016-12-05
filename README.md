@@ -7,9 +7,10 @@
  * ionic platform add ios/android   
  * ionic build android   //生成的app可直接下载
  
+ 
  * 关于更新图标问题
-   * 将图标放在resource文件下，改后缀名为.ai
-   * ionic resource   //目标文件夹即可生成相应文件
+  * 将图标放在resource文件下，改后缀名为.ai
+  * ionic resource   //目标文件夹即可生成相应文件
     
      
      
@@ -49,7 +50,7 @@
 })
 
 
-```
+
  
    
    
