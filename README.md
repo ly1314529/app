@@ -3,16 +3,13 @@
 
 * 如何生成一个app？具体请看[官网](http://ionicframework.com/getting-started/)
   
-   * npm install -g cordova ionic    //下载这个官方包
-   
-   * ionic platform add ios/android   
-   
-   * ionic build android   //生成的app可直接下载
-   
-   * 关于更新图标问题
+ * npm install -g cordova ionic    
+ * ionic platform add ios/android   
+ * ionic build android   //生成的app可直接下载
+ 
+ * 关于更新图标问题
    * 将图标放在resource文件下，改后缀名为.ai
-   
-   * ionic resource   //目标文件夹即可生成相应文件
+   * ionic resource   //目标文件夹即可生成相应文件
     
      
      
