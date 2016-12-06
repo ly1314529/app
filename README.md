@@ -48,9 +48,8 @@
     }
   });
 })
-
-
-
+``` 
+    * config.xml是用来配置android/ios选项
  
    
    
