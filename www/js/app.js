@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   
-  $ionicConfigProvider.platform.android.tabs.position("bottom");
+  $ionicConfigProvider.platform.android.tabs.position("bottom");  //make the list on the bottom
   $ionicConfigProvider.tabs.style('standard');
   
       $stateProvider
