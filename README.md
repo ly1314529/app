@@ -16,7 +16,7 @@
      
      
      
-     此时你的目录下比较重要的就是
+ * 此时你的目录下比较重要的就是
      
   
   ```
@@ -28,10 +28,10 @@
  ```
      
     
-    *  www/js/app.js
+  * www/js/app.js
      
      
-  ```javascript
+```javascript
      
    angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])  //starter.controllers就是下面的controller文件，           //starter.services就是service文件，必要
  .run(function($ionicPlatform) {
